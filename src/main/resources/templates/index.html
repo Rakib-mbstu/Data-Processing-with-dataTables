@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css"/>
+
+    <!-- <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+</head>
+<body>
+<table id="myTable">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Dept</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student: ${studentList}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.dept}"></td>
+    </tr>
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
+<script>
+    new DataTable('#myTable', {
+        responsive:true,
+        ajax: 'api/students',
+        columnDefs:[{ orderable: false,targets:2}],
+        columns: [
+            { data: 'id' },
+            { data: 'name' },
+            { data: 'dept' }
+        ]
+    });
+</script>
+</body>
+</html>
